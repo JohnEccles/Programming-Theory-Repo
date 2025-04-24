@@ -17,6 +17,8 @@ public class CharacterMovement : MonoBehaviour
 
     public GameObject heldItem;
 
+    public bool isHeld = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,9 +110,25 @@ public class CharacterMovement : MonoBehaviour
         }
 
 
+        if (context.performed) 
+        {
+            print("MOSADSD");
+            isHeld = true;
+        }
+
+        if (context.canceled)
+        {
+            print("opwqieouwoie");
+            isHeld = false;
+        }
+
         // When the key is lifted up.
         if (context.canceled && !context.performed) 
         {
+            //print(" THUS THOU ART A MAN OF PASSING FEVER");
+
+            ///*
+            
             Debug.Log("Lifted Up");
 
             RaycastHit hit;
@@ -137,6 +155,7 @@ public class CharacterMovement : MonoBehaviour
                     }
                 }
             }
+            //*/
         }
             
         

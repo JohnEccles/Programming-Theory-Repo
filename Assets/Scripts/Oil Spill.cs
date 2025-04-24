@@ -39,7 +39,20 @@ public class OilSpill : Hazard
 
     private void OnTriggerStay(Collider other)
     {
-        elapsedTime -= Time.deltaTime;
+        if (other.tag == "Player")
+        {
+            var player = other.GetComponent<CharacterMovement>();
+
+            if (player.isHeld)
+            {
+                elapsedTime -= Time.deltaTime;
+            }
+            else
+            {
+                elapsedTime = cleaningTime;
+            }
+
+        }   
     }
 
 }
