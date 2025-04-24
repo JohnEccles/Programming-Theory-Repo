@@ -13,7 +13,8 @@ public class CharacterMovement : MonoBehaviour
     private float rotationSpeed = 1.0f;
 
     private Vector3 move;
-    
+    private float pickupRange = 10.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,14 @@ public class CharacterMovement : MonoBehaviour
         // trigger once per press
         if (context.started == true) 
         {
-            print("USER INTERACT"); 
+            RaycastHit hit;
+            
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+            {
+                print("USER INTERACT WITH: " + hit.transform.gameObject.name); 
+            }
+
+            
         }
             
     }
