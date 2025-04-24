@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 move;
     private float pickupRange = 10.0f;
 
+    public GameObject heldItem;
 
     // Start is called before the first frame update
     void Start()
@@ -33,16 +34,67 @@ public class CharacterMovement : MonoBehaviour
         if (context.started == true) 
         {
             RaycastHit hit;
-            
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
             {
-                print("USER INTERACT WITH: " + hit.transform.gameObject.name); 
+                print("USER INTERACT WITH: " + hit.transform.gameObject.name);
+
+
+                // Change to TAG 
+                if (hit.transform.gameObject.tag == "Item")
+                {
+
+                    if (heldItem != null)
+                    {
+                        heldItem.SetActive(true);
+                    }
+                    heldItem = hit.transform.gameObject;
+                    heldItem.SetActive(false);
+                }
+                else if (hit.transform.gameObject.tag == "Hazard") 
+                {
+                    // If hit object has component of a hazard
+                    if (hit.transform.gameObject.GetComponent<Hazard>() == true)
+                    {
+                        var Hazard = hit.transform.gameObject.GetComponent<Hazard>();
+
+                        if (Hazard.requiremnt == heldItem)
+                        {
+                            Hazard.deactivate();
+                            print("Requirement Met");
+
+                            if (heldItem != null) // if holding an item
+                            {
+                                // Reset Held Item
+                                heldItem.SetActive(true);
+                                heldItem = null;
+                            }
+
+
+                        }
+                        else if (Hazard.requiremnt == null)
+                        {
+                            Hazard.deactivate();
+                            print("No Requirement");
+                        }
+
+
+                    }
+                }
+                else
+                {
+                    // If not an item below not needed
+                    return;
+                }
             }
 
-            
-        }
-            
+        
+        } 
+
     }
+
+
+
+
 
 
     private void Update()
