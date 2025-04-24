@@ -1,0 +1,38 @@
+Programming Theory Project Design Document
+
+
+1.  Inheritance  - choose your objects
+
+Hazards -> Fire, Electrocution, Explosion, Falling-Object, Slipping, Falling 
+
+Stop each hazard from happening 
+
+
+2.  Polymorphism - choose your behaviors
+
+Time Till Hazard Happens
+Range of Danger
+Interaction Radius
+Requirements to Fix/Prevent
+
+
+3.  Encapsulation - choose your data
+
+Time/Radius/Range Must be positive
+
+Requirements/Item to fix must be a valid option/type i.e. Water STOP Fire
+
+
+4.  Abstraction - choose your functions
+
+Note some of the higher-level functions that could be useful for reuse in your code. 
+
+Timmer to track time till hazard happens 
+
+
+
+ 
+
+
+ 
+
