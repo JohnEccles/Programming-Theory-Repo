@@ -10,7 +10,7 @@ public class Hazard : MonoBehaviour
     public bool isActive = true;
     public Object requiremnt;
     public static float timeLimmit;
-    public float timeLeft { get; private set; }
+    public float timeLeft { get; private set; } // ENCAPSULATION
 
     private void Awake()
     {
@@ -18,16 +18,25 @@ public class Hazard : MonoBehaviour
 
     }
 
-    public void deactivate() 
+    public void deactivate()
     {
         isActive = false;
     }
 
-    public void timer() 
+    public void timer()
     {
         timeLeft -= Time.deltaTime;
     }
 
-   
+    public virtual void SetActive()
+    {
+        isActive = true;
+    }
+
+    public void SetActive(bool value)
+    {
+        isActive = value;
+    }
+
 
 }

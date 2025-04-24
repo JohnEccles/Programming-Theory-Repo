@@ -40,72 +40,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 print("USER INTERACT WITH: " + hit.transform.gameObject.name);
 
-
-                // Change to TAG 
-                if (hit.transform.gameObject.tag == "Item")
-                {
-
-                    if (heldItem != null)
-                    {
-                        heldItem.SetActive(true);
-                    }
-                    heldItem = hit.transform.gameObject;
-                    heldItem.SetActive(false);
-                }
-                else if (hit.transform.gameObject.tag == "Hazard") 
-                {
-                    // If hit object has component of a hazard
-                    if (hit.transform.gameObject.GetComponent<Hazard>() == true)
-                    {
-                        var Hazard = hit.transform.gameObject.GetComponent<Hazard>();
-
-                        if (Hazard.requiremnt == heldItem)
-                        {
-                            Hazard.deactivate();
-                            print("Requirement Met");
-
-                            if (heldItem != null) // if holding an item
-                            {
-                                // Reset Held Item
-                                heldItem.SetActive(true);
-                                heldItem = null;
-                            }
-
-
-                        }
-                        else if (Hazard.requiremnt == null)
-                        {
-                            Hazard.deactivate();
-                            print("No Requirement");
-                        }
-
-
-                    }
-                }
-
-                else if (hit.transform.gameObject.tag == "Fire")
-                {
-                    // If hit object has component of a hazard
-                    if (hit.transform.gameObject.GetComponent<Hazard>() == true)
-                    {
-                        var Hazard = hit.transform.gameObject.GetComponent<Hazard>();
-
-                        if (Hazard.requiremnt == heldItem)
-                        {
-                            Hazard.deactivate();
-                            print("Requirement Met");
-
-                            if (heldItem != null) // if holding an item
-                            {
-                                // Reset Held Item
-                                heldItem.SetActive(true);
-                                heldItem = null;
-                            }
-                        }
-                    }
-                }
-
-                
+                HandleInput(hit); // ABSTRACTION
             }
         }
 
@@ -122,38 +57,19 @@ public class CharacterMovement : MonoBehaviour
             isHeld = false;
         }
 
-        // When the key is lifted up.
+        // Key Must be held
         if (context.canceled && !context.performed) 
         {
             //print(" THUS THOU ART A MAN OF PASSING FEVER");
 
             ///*
             
-            Debug.Log("Lifted Up");
+            //Debug.Log("Lifted Up");
 
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
             {
-                if (hit.transform.gameObject.tag == "Oil Spill")
-                {
-                    // If hit object has component of a hazard
-                    if (hit.transform.gameObject.GetComponent<Hazard>() == true)
-                    {
-                        var Oil_Spill = hit.transform.gameObject.GetComponent<OilSpill>();
-                        if (Oil_Spill.requiremnt == heldItem && Oil_Spill.elapsedTime <= 0)
-                        {
-                            Oil_Spill.deactivate();
-                            print("Requirement Met");
-
-                            if (heldItem != null) // if holding an item
-                            {
-                                // Reset Held Item
-                                heldItem.SetActive(true);
-                                heldItem = null;
-                            }
-                        }
-                    }
-                }
+                HandleInput(hit); // ABSTRACTION
             }
             //*/
         }
@@ -184,6 +100,95 @@ public class CharacterMovement : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
 
     }
+
+
+    private void HandleInput(RaycastHit hit)
+    {
+        // Change to if - else if to switch statements
+        if (hit.transform.gameObject.tag == "Item")
+        {
+
+            if (heldItem != null)
+            {
+                heldItem.SetActive(true);
+            }
+            heldItem = hit.transform.gameObject;
+            heldItem.SetActive(false);
+        }
+        else if (hit.transform.gameObject.tag == "Hazard")
+        {
+            // If hit object has component of a hazard
+            if (hit.transform.gameObject.GetComponent<Hazard>() == true)
+            {
+                var Hazard = hit.transform.gameObject.GetComponent<Hazard>();
+
+                if (Hazard.requiremnt == heldItem)
+                {
+                    Hazard.deactivate();
+                    print("Requirement Met");
+
+                    if (heldItem != null) // if holding an item
+                    {
+                        // Reset Held Item
+                        heldItem.SetActive(true);
+                        heldItem = null;
+                    }
+
+
+                }
+                else if (Hazard.requiremnt == null)
+                {
+                    Hazard.deactivate();
+                    print("No Requirement");
+                }
+
+
+            }
+        }
+
+        else if (hit.transform.gameObject.tag == "Fire")
+        {
+            // If hit object has component of a hazard
+            if (hit.transform.gameObject.GetComponent<Hazard>() == true)
+            {
+                var Hazard = hit.transform.gameObject.GetComponent<Hazard>();
+
+                if (Hazard.requiremnt == heldItem)
+                {
+                    Hazard.deactivate();
+                    print("Requirement Met");
+
+                    if (heldItem != null) // if holding an item
+                    {
+                        // Reset Held Item
+                        heldItem.SetActive(true);
+                        heldItem = null;
+                    }
+                }
+            }
+        }
+        else if (hit.transform.gameObject.tag == "Oil Spill")
+        {
+            // If hit object has component of a hazard
+            if (hit.transform.gameObject.GetComponent<Hazard>() == true)
+            {
+                var Oil_Spill = hit.transform.gameObject.GetComponent<OilSpill>();
+                if (Oil_Spill.requiremnt == heldItem && Oil_Spill.elapsedTime <= 0)
+                {
+                    Oil_Spill.deactivate();
+                    print("Requirement Met");
+
+                    if (heldItem != null) // if holding an item
+                    {
+                        // Reset Held Item
+                        heldItem.SetActive(true);
+                        heldItem = null;
+                    }
+                }
+            }
+        }
+    }
+
 
 }
 
