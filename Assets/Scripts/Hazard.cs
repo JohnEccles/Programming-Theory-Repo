@@ -8,14 +8,8 @@ public class Hazard : MonoBehaviour
 
 
     public bool isActive = true;
-
-    public float Damadge;
-    public Collider interactRange;
-    public Collider damadgeRadius;
-
     public Object requiremnt;
-
-    public float timeLimmit;
+    public static float timeLimmit;
     public float timeLeft { get; private set; }
 
     private void Awake()

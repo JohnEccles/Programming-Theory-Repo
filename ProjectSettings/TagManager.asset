@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Item
   - Hazard
+  - Fire
+  - Oil Spill
   layers:
   - Default
   - TransparentFX

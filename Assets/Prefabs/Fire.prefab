@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2619622595926421317}
   - component: {fileID: 3470228184555573755}
   - component: {fileID: 2843332290133947851}
-  - component: {fileID: 5681459184292855087}
+  - component: {fileID: 6536545399945083090}
   m_Layer: 0
-  m_Name: Hazard 2
-  m_TagString: Hazard
+  m_Name: Fire
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c710f99d660799847a787d6eb282ddb1, type: 2}
+  - {fileID: 2100000, guid: 58b215d628ef0f94cb80a1e86146973b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +108,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5681459184292855087
+--- !u!114 &6536545399945083090
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,15 +117,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 420745960213681572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a39d020bd9380c4eb2f1556aa69463e, type: 3}
+  m_Script: {fileID: 11500000, guid: e491abd3d779081408edbbf659804b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  Damadge: 1
-  interactRange: {fileID: 5751415236929594260}
-  damadgeRadius: {fileID: 8914225178233283832}
   requiremnt: {fileID: 0}
   timeLimmit: 0
+  damadge: 0
+  damadgeInterval: 0
 --- !u!1 &1156025992139532614
 GameObject:
   m_ObjectHideFlags: 0

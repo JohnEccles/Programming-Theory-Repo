@@ -80,15 +80,68 @@ public class CharacterMovement : MonoBehaviour
 
                     }
                 }
-                else
+
+                else if (hit.transform.gameObject.tag == "Fire")
                 {
-                    // If not an item below not needed
-                    return;
+                    // If hit object has component of a hazard
+                    if (hit.transform.gameObject.GetComponent<Hazard>() == true)
+                    {
+                        var Hazard = hit.transform.gameObject.GetComponent<Hazard>();
+
+                        if (Hazard.requiremnt == heldItem)
+                        {
+                            Hazard.deactivate();
+                            print("Requirement Met");
+
+                            if (heldItem != null) // if holding an item
+                            {
+                                // Reset Held Item
+                                heldItem.SetActive(true);
+                                heldItem = null;
+                            }
+                        }
+                    }
+                }
+
+                
+            }
+        }
+
+
+        // When the key is lifted up.
+        if (context.canceled && !context.performed) 
+        {
+            Debug.Log("Lifted Up");
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+            {
+                if (hit.transform.gameObject.tag == "Oil Spill")
+                {
+                    // If hit object has component of a hazard
+                    if (hit.transform.gameObject.GetComponent<Hazard>() == true)
+                    {
+                        var Oil_Spill = hit.transform.gameObject.GetComponent<OilSpill>();
+                        if (Oil_Spill.requiremnt == heldItem && Oil_Spill.elapsedTime <= 0)
+                        {
+                            Oil_Spill.deactivate();
+                            print("Requirement Met");
+
+                            if (heldItem != null) // if holding an item
+                            {
+                                // Reset Held Item
+                                heldItem.SetActive(true);
+                                heldItem = null;
+                            }
+                        }
+                    }
                 }
             }
-
+        }
+            
         
-        } 
+        
+
 
     }
 
