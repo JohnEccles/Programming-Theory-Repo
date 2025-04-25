@@ -9,8 +9,8 @@ public class Hazard : MonoBehaviour
 
     public bool isActive = true;
     public Object requiremnt;
-    public static float timeLimmit;
-    public float timeLeft { get; private set; } // ENCAPSULATION
+    public float timeLimmit;
+    public float timeLeft { get;  set; } // ENCAPSULATION
 
     private void Awake()
     {
